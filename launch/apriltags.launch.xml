@@ -1,16 +1,20 @@
 <launch>
 
-    <include file="$(find-pkg-share realsense2_camera)/launch/rs_launch.py">
+    <!-- <include file="$(find-pkg-share realsense2_camera)/launch/rs_launch.py">
         <arg name="rgb_camera.profile" value ="1280x720x30"/>
         <arg name="pointcloud.enable" value="true"/>
-    </include>
+    </include> -->
 
-    <include file="$(find-pkg-share image_proc)/launch/image_proc.launch.py"/>
+    <!-- <include file="$(find-pkg-share image_proc)/launch/image_proc.launch.py"/> -->
 
     <node pkg="apriltag_ros" exec="apriltag_node">
         <param from="$(find-pkg-share apriltags)/tags.yaml"/>
-        <remap from="/image_rect" to="/camera/color/image_raw"/>
-        <remap from="/camera_info" to="/camera/color/camera_info"/>
+        <!-- <remap from="/image_rect" to="/camera/color/image_raw"/>
+        <remap from="/camera_info" to="/camera/color/camera_info"/> -->
+        <!-- <remap from="/image_rect" to="/zed/zed_node/rgb/image_rect_color"/>
+        <remap from="/camera_info" to="/zed/zed_node/rgb/camera_info"/> -->
+        <remap from="/image_rect" to="/zed/zed_node/left/image_rect_color"/>
+        <remap from="/camera_info" to="/zed/zed_node/left/camera_info"/>
     </node>
     <node pkg="apriltags" exec="tag_locations"/>
 
